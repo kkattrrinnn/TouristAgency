@@ -21,7 +21,7 @@ public class Main {
 
         try (Connection connection = DriverManager.getConnection(URLFIXED,USERNAME,PASSWORD);
                 Statement statement = connection.createStatement()){      // соединение с БД
-            //statement.execute("insert into business.products (product_name, price, shop_id) values (\"Ice\", 45, 2)");
+            statement.execute("insert into business.products (product_name, price, shop_id) values (\"Smth\", 45, 2)");
             //statement.executeUpdate("update business.products set product_name=\"Snikers\" where product_id=11");
             //statement.addBatch("insert into business.products (product_name, price, shop_id) values (\"Prod1\", 23, 1)");
             //statement.addBatch("insert into business.products (product_name, price, shop_id) values (\"Prod2\", 354, 2)");
