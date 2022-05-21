@@ -8,7 +8,7 @@ public class Main {
     private static final String USERNAME = "root";
     private static final String PASSWORD = "HhVL:jfdR>W7N+at";
     private static final String URL = "jdbc:mysql://192.168.120.102:3306/MySQL?useSSL=false";
-    private static final String URLFIXED = "jdbc:mysql://localhost:3306/MySQL?useSSL=false&serverTimezone=UTC";
+    private static final String URLFIXED = "jdbc:mysql://192.168.120.102:3306/MySQL?useSSL=false&serverTimezone=UTC";
     public static void main(String[] args) throws SQLException {
 
         try {
