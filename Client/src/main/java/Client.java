@@ -6,7 +6,7 @@ public class Client {
         {
             System.out.println("Connected to server");
 
-            String request = "na-na";
+            String request = "na-na-na-nan-na-na-na-na-ma";
             System.out.println("Request: " + request);
             phone.writeLine(request);
 
