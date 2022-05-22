@@ -1,3 +1,5 @@
+
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.sql.Connection;
@@ -15,24 +17,24 @@ public class Server {
     public static void main(String[] args) throws SQLException {
 
         DBProcessor db = new DBProcessor();
-        Connection conn = db.getConnection(URLFIXED, USERNAME, PASSWORD);
-        String query = "select * from touristagency.tours";
+        Connection connection = db.getConnection(URLFIXED, USERNAME, PASSWORD);
+        /*String query = "select * from touristagency.tours";
         Statement stat = conn.createStatement();
         ResultSet resSet = stat.executeQuery(query);
         while (resSet.next()) {
             System.out.println(resSet.getString("tour_name"));
-        }
-        conn.close();
+        }*/
+        connection.close();
 
-        try (ServerSocket server = new ServerSocket(8000))                                          // серверный сокет - он один!
+        try (ServerSocket server = new ServerSocket(8000))                                     // серверный сокет - он один!
         {
             System.out.println("Server started!");
             while (loop) {
-                Phone phone = new Phone(server);                                                         // для каждого нового клиента новый сокет
+                Phone phone = new Phone(server);                                                    // для каждого нового клиента новый сокет
                 new Thread(() -> {                                                                  // отдельный новый поток для каждого клиента
                     String request = phone.readLine();
                     String response = (int) (Math.random() * 30 - 10) + "";
-                    try {Thread.sleep(4000);} catch (InterruptedException e) { throw new RuntimeException(e);}
+                    //try {Thread.sleep(4000);} catch (InterruptedException e) { throw new RuntimeException(e);}
                     phone.writeLine(response);
                     try {phone.close();} catch (IOException e) { throw new RuntimeException(e);}
                 }).start();

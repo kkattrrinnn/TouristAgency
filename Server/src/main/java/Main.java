@@ -1,13 +1,10 @@
-package com.jdbc;
-
-
+import java.awt.*;
 import java.sql.*;
 
 public class Main {
 
 
     public static void main(String[] args) throws SQLException {
-
 
         /*String queryInsert = "insert into business.products (product_name, price, shop_id) values (?, ?, ?)";
         PreparedStatement prepInsert = conn.prepareStatement(queryInsert);
