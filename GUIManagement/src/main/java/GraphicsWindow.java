@@ -27,7 +27,7 @@ public class GraphicsWindow{
         this.jFrame.add(this.jPanel);
     }
 
-    public JFrame getFrame() {
-        return this.jFrame;
+    public void delFrame() {
+        this.jFrame.dispose();
     }
 }
