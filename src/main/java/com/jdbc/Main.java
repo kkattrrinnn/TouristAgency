@@ -5,16 +5,21 @@ import java.sql.*;
 
 public class Main {
 
-    private static final String USERNAME = "root";
-    private static final String PASSWORD = "HhVL:jfdR>W7N+at";
-    private static final String URL = "jdbc:mysql://localhost:3306/MySQL";
+    private static final String USERNAME = "test";
+    private static final String PASSWORD = "Hhf:W7N+at";
+    private static final String URL = "jdbc:mysql://192.168.10.63:3306/MySQL";
     private static final String URLFIXED = URL + "?useSSL=false&serverTimezone=UTC";
     public static void main(String[] args) throws SQLException {
         DBProcessor db = new DBProcessor();
         Connection conn = db.getConnection(URLFIXED, USERNAME, PASSWORD);
-        String query = "select * from business.products";
+        String query = "select * from touristagency.tours";
+        Statement stat = conn.createStatement();
+        ResultSet resSet = stat.executeQuery(query);
+        while (resSet.next()) {
+            System.out.println(resSet.getString("tour_name"));
+        }
 
-        String queryInsert = "insert into business.products (product_name, price, shop_id) values (?, ?, ?)";
+        /*String queryInsert = "insert into business.products (product_name, price, shop_id) values (?, ?, ?)";
         PreparedStatement prepInsert = conn.prepareStatement(queryInsert);
         prepInsert.setString(1,"NewFood");
         prepInsert.setDouble(2,458.9);
@@ -25,7 +30,7 @@ public class Main {
         ResultSet resSet = prepStat.executeQuery();
         while (resSet.next()) {
             System.out.println(resSet.getInt("product_id") + " " + resSet.getString("product_name"));
-        }
+        }*/
 
         conn.close();
 
