@@ -8,6 +8,7 @@ public class GraphicsWindow{
     }
 
    public static void создаем_окно(){
+
         JFrame jFrame = new JFrame();
 
        ImageIcon img = new ImageIcon("GUIManagement/img/Icon.jpg");
