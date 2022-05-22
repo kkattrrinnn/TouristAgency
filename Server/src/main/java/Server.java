@@ -1,4 +1,3 @@
-import com.jdbc.DBProcessor;
 import java.io.*;
 import java.net.ServerSocket;
 import java.sql.Connection;
@@ -12,6 +11,7 @@ public class Server {
     private static final String PASSWORD = "Hhf:W7N+at";
     private static final String URL = "jdbc:mysql://192.168.10.63:3306/MySQL";
     private static final String URLFIXED = URL + "?useSSL=false&serverTimezone=UTC";
+    public static boolean loop = true;
     public static void main(String[] args) throws SQLException {
 
         DBProcessor db = new DBProcessor();
@@ -27,14 +27,14 @@ public class Server {
         try (ServerSocket server = new ServerSocket(8000))                                          // серверный сокет - он один!
         {
             System.out.println("Server started!");
-            while (true) {
+            while (loop) {
                 Phone phone = new Phone(server);                                                         // для каждого нового клиента новый сокет
                 new Thread(() -> {                                                                  // отдельный новый поток для каждого клиента
                     String request = phone.readLine();
                     String response = (int) (Math.random() * 30 - 10) + "";
-                    try {Thread.sleep(4000);} catch (InterruptedException e) { }
+                    try {Thread.sleep(4000);} catch (InterruptedException e) { throw new RuntimeException(e);}
                     phone.writeLine(response);
-                    try {phone.close();} catch (IOException e) { }
+                    try {phone.close();} catch (IOException e) { throw new RuntimeException(e);}
                 }).start();
             }
         } catch (IOException e) {
