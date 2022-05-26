@@ -30,4 +30,8 @@ public class GraphicsWindow{
     public void delFrame() {
         this.jFrame.dispose();
     }
+
+    public static void main(String[] args) {
+        GraphicsWindow GW = new GraphicsWindow();
+    }
 }
