@@ -15,7 +15,7 @@ public class GraphicsWindow{
         Dimension dimension = toolkit.getScreenSize();
         this.jFrame.setBounds(dimension.width/2-width/2,dimension.height/2-height/2, width, height);
         this.jFrame.setTitle("Tourist Agency");
-
+        this.jFrame.setResizable(false);
         this.jFrame.setVisible(true);                // видимость окна
         this.jFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);   // для закрытия окна
         this.jFrame.setLayout(null);
