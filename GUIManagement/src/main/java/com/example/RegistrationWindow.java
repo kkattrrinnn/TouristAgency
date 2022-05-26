@@ -10,6 +10,7 @@ public class RegistrationWindow extends GraphicsWindow{
     JTextField password_Register;
     JTextField Name_Register;
     JButton ent_button_Register;
+    JButton Will_come_back_button;
     JLabel labelLogin_Register;
     JLabel labelName_Register;
     JLabel labelPassword_Register;
@@ -21,7 +22,7 @@ public class RegistrationWindow extends GraphicsWindow{
     RegistrationWindow() {
         this.entrance_Register = false;
  //-----------------------------------------------------------------
-        this.error_no_login = new JLabel("Пользователь не обнаружен, зарегистрируйтесь");
+        this.error_no_login = new JLabel("Пользователь не обнаружен, зарегистрируйтесь");  // сообщение об ошибке
         this.error_no_login.setFont(BigFontCS);
         this.error_no_login.setForeground(Color.red);
         this.error_no_login.setBounds(x-350,y-110,width = 1000 , height = 60);
@@ -64,7 +65,7 @@ public class RegistrationWindow extends GraphicsWindow{
 //-----------------------------------------------------------------
 
         this.ent_button_Register = new JButton("Зарегистрироватся");
-        this.ent_button_Register.setBounds(x-30, y+4*height+30, width+50, height);
+        this.ent_button_Register.setBounds(x+100, y+4*height+30, width+50, height);
         this.ent_button_Register.setBackground(new Color(255, 128, 128, 90));
         this.ent_button_Register.setFont(BigFontCS);
         this.ent_button_Register.addActionListener(e -> {        // обработка нажатия
@@ -75,7 +76,20 @@ public class RegistrationWindow extends GraphicsWindow{
         this.entrance_Register = true;
         this.jPanel.add(this.ent_button_Register);
 //-----------------------------------------------------------------
+        this.Will_come_back_button = new JButton("Вернутся");
+        this.Will_come_back_button.setBounds(x-350, y+4*height+30, width-50, height);
+        this.Will_come_back_button.setBackground(new Color(255, 128, 128, 90));
+        this.Will_come_back_button.setFont(BigFontCS);
+        this.Will_come_back_button.addActionListener(e -> {        // обработка нажатия
+            this.jPanel.removeAll();                         // очистка панели
+            this.jPanel.repaint();
+            this.jPanel.revalidate();
+            delFrame();
+            new InitialWindow();
+        });
+        this.jPanel.add(this.Will_come_back_button);
     }
+//----------------------------------------------------------------
 
 
     public Boolean getEntrance() {

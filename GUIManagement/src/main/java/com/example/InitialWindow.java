@@ -8,11 +8,19 @@ public class InitialWindow extends GraphicsWindow {
     Font BigFontCS = new Font("ComicSans", Font.BOLD, 45);
     JButton ent_button;
     JButton reg_button;
+
+    JLabel label_hello_input;
     public boolean entrance;
     public boolean registration;
 
     /* Создание окна с двумя кнопками - вход и регистрация */
     InitialWindow() {
+//-----------------------------------------------------------------
+        this.label_hello_input = new JLabel("Tourist Agency");
+        this.label_hello_input.setFont(BigFontCS);
+        this.label_hello_input.setBounds(400, -300, width, height);
+        this.jPanel.add(this.label_hello_input);
+//-----------------------------------------------------------------
         this.ent_button = new JButton("Вход");
         this.ent_button.setBounds(350, 170, 400, 100);
         this.ent_button.setBackground(new Color(200, 100, 250, 90));
@@ -23,7 +31,7 @@ public class InitialWindow extends GraphicsWindow {
             this.jPanel.revalidate();
             this.entrance = true;
             delFrame();
-            LoginWindow LW = new LoginWindow();});
+            new MainPage();});
         this.jPanel.add(this.ent_button);
         
         this.reg_button = new JButton("Регистрация");
