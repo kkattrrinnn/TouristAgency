@@ -1,3 +1,5 @@
+package com.example;
+
 public class Order {
     private int user_id;
     private int tour_id;

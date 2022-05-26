@@ -1,5 +1,8 @@
+package com.example;
+
 import javax.swing.*;
 import java.awt.*;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class LoginWindow extends GraphicsWindow {
@@ -15,9 +18,8 @@ public class LoginWindow extends GraphicsWindow {
 
     JLabel error_no_password;
     int x = 400 , y = 160, width = 400 , height = 80;
-    public Boolean entrance_input;
+    public ArrayList<String> login_data;
     LoginWindow() {
-        this.entrance_input = false;
 //-----------------------------------------------------------------
         this.error_no_password = new JLabel("Неверный пароль");
         this.error_no_password.setFont(BigFontCS);
@@ -55,22 +57,32 @@ public class LoginWindow extends GraphicsWindow {
         this.ent_button_input.setBackground(new Color(255, 128, 128, 90));
         this.ent_button_input.setFont(BigFontCS);
         this.ent_button_input.addActionListener(e -> {        // обработка нажатия
-            this.jPanel.removeAll();                         // очистка панели
-            this.jPanel.repaint();
-            this.jPanel.revalidate();});
-
-            this.entrance_input = true;
+            login_data = getData();
+            try {
+                if (Server.authorization(login_data.get(0), login_data.get(1))) {
+                    this.jPanel.removeAll();                         // очистка панели
+                    this.jPanel.repaint();
+                    this.jPanel.revalidate();
+                    delFrame();
+                    MainPage MP = new MainPage();
+                }
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
         this.jPanel.add(this.ent_button_input);
     }
 
     //-----------------------------------------------------------------
-    public Boolean getEntrance() {
-        return this.entrance_input;
-    }
+
     public ArrayList<String> getData() {
         ArrayList<String> data = new ArrayList<>(2);
-        data.add(this.login.getText());
-        data.add(this.password_input.getText());
+        if (this.login.getText() != null) {
+            data.add(this.login.getText());
+        }
+        if (this.password_input.getText() != null) {
+            data.add(this.password_input.getText());
+        }
         return data;
 
     }

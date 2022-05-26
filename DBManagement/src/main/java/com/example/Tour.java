@@ -1,3 +1,5 @@
+package com.example;
+
 public class Tour {
     private String name;
     private String starting_point;
