@@ -13,9 +13,7 @@ public class LoginWindow extends GraphicsWindow {
     JButton Will_come_back_button;
     JLabel labelLogin_input;
     JLabel labelPassword_input;
-
     JLabel label_hello_input;
-
     JLabel error_no_password;
     int x = 400 , y = 160, width = 400 , height = 80;
     public ArrayList<String> login_data;
@@ -74,7 +72,9 @@ public class LoginWindow extends GraphicsWindow {
                     this.jPanel.repaint();
                     this.jPanel.revalidate();
                     delFrame();
-                    new MainPage(this.id);
+                    if (this.id == 19){
+                        new TourManagement(this.id);
+                    }else new MainPage(this.id);   //сделать если зашел админ
                 }
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);

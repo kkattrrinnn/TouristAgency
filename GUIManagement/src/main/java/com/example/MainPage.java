@@ -9,12 +9,13 @@ public class MainPage extends GraphicsWindow{
     Font BigFontCS = new Font("ComicSans", Font.BOLD, 30);
     JLabel label_hello_input;
     int x = 400 , y = 60, width = 400 , height = 80;
-    String Tur_name,starting_city,destination_city,duration, Dates;
-    int Tour_cost;
+    String Tur_name;
     JComboBox box_tur;
     JButton Book_a_tour;
     JButton ent_button_MainPage;
     JButton reg_button;
+
+    JButton Tour_design;
 
     MainPage(int id) {
         this.id = id;
@@ -50,7 +51,7 @@ public class MainPage extends GraphicsWindow{
         this.box_tur.addActionListener(actionListener);
 //-----------------------------------------------------------------
         this.Book_a_tour = new JButton("Подробнее");
-        this.Book_a_tour.setBounds(x-50, y+4*height, width, height);
+        this.Book_a_tour.setBounds(x-50, y+3*height, width, height);
         this.Book_a_tour.setBackground(new Color(255, 128, 128, 90));
         this.Book_a_tour.setFont(BigFontCS);
         this.Book_a_tour.addActionListener(e -> {                   // обработка нажатия
@@ -68,29 +69,67 @@ public class MainPage extends GraphicsWindow{
         });
         this.jPanel.add(this.Book_a_tour);
 //-----------------------------------------------------------------
-        this.ent_button_MainPage = new JButton("Авторизация");
-        this.ent_button_MainPage.setBounds(x+200, y+5*height+30, width, height);
-        this.ent_button_MainPage.setBackground(new Color(200, 100, 250, 90));
-        this.ent_button_MainPage.setFont(BigFontCS);
-        this.ent_button_MainPage.addActionListener(e -> {        // обработка нажатия
-            this.jPanel.removeAll();                         // очистка панели
-            this.jPanel.repaint();
-            this.jPanel.revalidate();
-            delFrame();
-            new LoginWindow();});
-        this.jPanel.add(this.ent_button_MainPage);
 
-        this.reg_button = new JButton("Регистрация");
-        this.reg_button.setBounds(x-280, y+5*height+30, width, height);
-        this.reg_button.setBackground(new Color(200, 100, 250, 90));
-        this. reg_button.setFont(BigFontCS);
-        this.reg_button.addActionListener(e -> {        // обработка нажатия
-            this.jPanel.removeAll();                         // очистка панели
-            this.jPanel.repaint();
-            this.jPanel.revalidate();
-            delFrame();
-            new RegistrationWindow();});
-        this.jPanel.add(this.reg_button);
-    }
+        if (this.id == 0) {
+            this.ent_button_MainPage = new JButton("Авторизация");
+            this.ent_button_MainPage.setBounds(x + 200, y + 4 * height + 30, width, height);
+            this.ent_button_MainPage.setBackground(new Color(200, 100, 250, 90));
+            this.ent_button_MainPage.setFont(BigFontCS);
+            this.ent_button_MainPage.addActionListener(e -> {        // обработка нажатия
+                this.jPanel.removeAll();                         // очистка панели
+                this.jPanel.repaint();
+                this.jPanel.revalidate();
+                delFrame();
+                new LoginWindow();
+            });
+            this.jPanel.add(this.ent_button_MainPage);
+
+//-----------------------------------------------------------------
+            this.reg_button = new JButton("Регистрация");
+            this.reg_button.setBounds(x - 280, y + 4 * height + 30, width, height);
+            this.reg_button.setBackground(new Color(200, 100, 250, 90));
+            this.reg_button.setFont(BigFontCS);
+            this.reg_button.addActionListener(e -> {        // обработка нажатия
+                this.jPanel.removeAll();                         // очистка панели
+                this.jPanel.repaint();
+                this.jPanel.revalidate();
+                delFrame();
+                new RegistrationWindow();
+            });
+            this.jPanel.add(this.reg_button);
+        }else{
+            this.reg_button = new JButton("Выйти из акаунта");
+            this.reg_button.setBounds(x+200, y + 4 * height + 30, width, height);
+            this.reg_button.setBackground(new Color(200, 100, 250, 90));
+            this.reg_button.setFont(BigFontCS);
+            this.reg_button.addActionListener(e -> {        // обработка нажатия
+                this.jPanel.removeAll();                         // очистка панели
+                this.jPanel.repaint();
+                this.jPanel.revalidate();
+                delFrame();
+                new MainPage();
+            });
+            this.jPanel.add(this.reg_button);
+ //----------------------------------------------------------------
+            this.Tour_design = new JButton("Мои туры");
+            this.Tour_design.setBounds(x - 280, y + 4 * height + 30, width, height);
+            this.Tour_design.setBackground(new Color(255, 128, 128, 90));
+            this.Tour_design.setFont(BigFontCS);
+            this.Tour_design.addActionListener(e -> {        // обработка нажатия
+                this.jPanel.removeAll();                         // очистка панели
+                this.jPanel.repaint();
+                this.jPanel.revalidate();
+                delFrame();
+                    try {
+                        DBProcessor.addOrder(this.id, DBProcessor.getTourId(Tur_name));
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    new MyTours(this.id);
+            });
+            this.jPanel.add(this.Tour_design);
+        }
+
+//----------------------------------------------------------------
+        }
 }
-
