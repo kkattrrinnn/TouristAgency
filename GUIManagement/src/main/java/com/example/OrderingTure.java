@@ -3,6 +3,7 @@ package com.example;
 import javax.swing.*;
 
 import java.awt.*;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class OrderingTure extends GraphicsWindow{
@@ -11,8 +12,16 @@ public class OrderingTure extends GraphicsWindow{
     Font BigFontCS = new Font("ComicSans", Font.BOLD, 40);
     JLabel label_Tur_name;
     int x = 300 , y = 30, width = 900 , height = 80;
+
+    public OrderingTure(int id, String Tur_name, ArrayList<String> tours) {
+        this.id = id;
+        constructor(Tur_name, tours);
+    }
     public OrderingTure(String Tur_name, ArrayList<String> tours){
-        System.out.println(Tur_name);
+        constructor(Tur_name, tours);
+    }
+
+    void constructor(String Tur_name, ArrayList<String> tours) {
 //-----------------------------------------------------------------
         this.label_Tur_name = new JLabel("Тур: "+ Tur_name);
         this.label_Tur_name.setFont(BigFontCS);
@@ -72,8 +81,19 @@ public class OrderingTure extends GraphicsWindow{
             this.jPanel.repaint();
             this.jPanel.revalidate();
             delFrame();
-            // отправить человека на авторизацию если он не зашел
-            new MainPage();  //надо сделать на страницу заказа
+            if (this.id != 0) {
+                try {
+                    DBProcessor.addOrder(this.id, DBProcessor.getTourId(Tur_name));
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+                new MyTours(this.id);
+            } else {
+                System.out.println(this.id);
+                System.out.println("Вы не вошли в систему!");
+                new LoginWindow();
+            }
+
         });
         this.jPanel.add(this.Tour_design);
     }

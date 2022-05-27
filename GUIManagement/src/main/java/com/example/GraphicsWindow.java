@@ -8,6 +8,8 @@ public class GraphicsWindow{
     public JPanel jPanel;
     public int width = 1100;                        // размеры окна
     public int height = 700;
+
+    public int id;
     GraphicsWindow() {
         this.jFrame = new JFrame();
         ImageIcon img = new ImageIcon("GUIManagement/img/Icon.jpg");

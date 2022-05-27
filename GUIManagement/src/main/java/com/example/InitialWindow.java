@@ -29,23 +29,11 @@ public class InitialWindow extends GraphicsWindow {
             this.jPanel.removeAll();                         // очистка панели
             this.jPanel.repaint();
             this.jPanel.revalidate();
-            this.entrance = true;
             delFrame();
             new MainPage();});
         this.jPanel.add(this.ent_button);
         
-        this.reg_button = new JButton("Регистрация");
-        this.reg_button.setBounds(250, 300, 600, 100);
-        this.reg_button.setBackground(new Color(200, 100, 250, 90));
-        this. reg_button.setFont(BigFontCS);
-        this.reg_button.addActionListener(e -> {        // обработка нажатия
-            this.jPanel.removeAll();                         // очистка панели
-            this.jPanel.repaint();
-            this.jPanel.revalidate();
-            this.registration = true;
-            delFrame();
-            RegistrationWindow RW = new RegistrationWindow();});
-        this.jPanel.add(this.reg_button);
+
     }
 
     public boolean getEntrance() {

@@ -2,6 +2,7 @@ package com.example;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class RegistrationWindow extends GraphicsWindow{
@@ -18,10 +19,17 @@ public class RegistrationWindow extends GraphicsWindow{
 
     JLabel error_no_login;
     int x = 400 , y = 190, width = 400 , height = 60;
-    public Boolean entrance_Register;
-    RegistrationWindow() {
-        this.entrance_Register = false;
- //-----------------------------------------------------------------
+
+    public RegistrationWindow(int id) {
+        this.id = id;
+        constructor();
+    }
+    public RegistrationWindow() {
+        constructor();
+    }
+
+    void constructor() {
+        //-----------------------------------------------------------------
         this.error_no_login = new JLabel("Пользователь не обнаружен, зарегистрируйтесь");  // сообщение об ошибке
         this.error_no_login.setFont(BigFontCS);
         this.error_no_login.setForeground(Color.red);
@@ -64,19 +72,27 @@ public class RegistrationWindow extends GraphicsWindow{
         this.jPanel.add(this.password_Register);
 //-----------------------------------------------------------------
 
-        this.ent_button_Register = new JButton("Зарегистрироватся");
+        this.ent_button_Register = new JButton("Зарегистрироваться");
         this.ent_button_Register.setBounds(x+100, y+4*height+30, width+50, height);
         this.ent_button_Register.setBackground(new Color(255, 128, 128, 90));
         this.ent_button_Register.setFont(BigFontCS);
         this.ent_button_Register.addActionListener(e -> {        // обработка нажатия
-            this.jPanel.removeAll();                         // очистка панели
-            this.jPanel.repaint();
-            this.jPanel.revalidate();});
-
-        this.entrance_Register = true;
+            ArrayList<String> registration_data = getData();
+            try {
+                if (DBProcessor.addUser(registration_data.get(0), registration_data.get(1), registration_data.get(2))) {
+                    this.jPanel.removeAll();                         // очистка панели
+                    this.jPanel.repaint();
+                    this.jPanel.revalidate();
+                    delFrame();
+                    new LoginWindow();
+                }
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
         this.jPanel.add(this.ent_button_Register);
 //-----------------------------------------------------------------
-        this.Will_come_back_button = new JButton("Вернутся");
+        this.Will_come_back_button = new JButton("Вернуться");
         this.Will_come_back_button.setBounds(x-350, y+4*height+30, width-50, height);
         this.Will_come_back_button.setBackground(new Color(255, 128, 128, 90));
         this.Will_come_back_button.setFont(BigFontCS);
@@ -85,10 +101,22 @@ public class RegistrationWindow extends GraphicsWindow{
             this.jPanel.repaint();
             this.jPanel.revalidate();
             delFrame();
-            new InitialWindow();
+            new MainPage();
         });
         this.jPanel.add(this.Will_come_back_button);
     }
-//----------------------------------------------------------------
 
+    public ArrayList<String> getData() {
+        ArrayList<String> data = new ArrayList<>();
+        if (this.Name_Register.getText() != null || this.Name_Register.getText() != "") {
+            data.add(this.Name_Register.getText());
+            if (this.login_Register.getText() != null || this.login_Register.getText() != "") {
+                data.add(this.login_Register.getText());
+                if (this.password_Register.getText() != null || this.password_Register.getText() != "") {
+                    data.add(this.password_Register.getText());
+                }
+            }
+        }
+        return data;
+    }
 }

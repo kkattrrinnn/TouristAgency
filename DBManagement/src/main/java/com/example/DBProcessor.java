@@ -27,11 +27,6 @@ public class DBProcessor {
         connection = DriverManager.getConnection(URLFIXED, USERNAME, PASSWORD);
         return connection;
     }
-    //[B@13eb8acf
-    public static void main(String[] args) {
-
-        //System.out.println(hashGeneration("root", "[B@7dc5e7b4".getBytes()));
-    }
 
     /* Генерирование хеша пароля */
     public static List<byte[]> hashGeneration(String psw, String user_salt) {
@@ -74,15 +69,20 @@ public class DBProcessor {
     }
 
     /* Добавление нового польователя в БД */
-    public void addUser(Connection connection, String name, String login, String password) throws SQLException {
-        List<byte[]> answer = hashGeneration(password, null);
-        String queryInsert = "insert into touristagency.users (user_name, user_login, user_password, user_salt) values (?, ?, ?, ?)";
-        PreparedStatement prepInsert = connection.prepareStatement(queryInsert);
-        prepInsert.setString(1, name);
-        prepInsert.setString(2, login);
-        prepInsert.setString(3, bytesToHex(answer.get(0)));
-        prepInsert.setString(4, bytesToHex(answer.get(1)));
-        prepInsert.execute();
+    public static boolean addUser(String name, String login, String password) throws SQLException {
+        boolean check = false;
+        if (!name.equals("") && !login.equals("") && !password.equals("")) {
+            List<byte[]> answer = hashGeneration(password, null);
+            String queryInsert = "insert into touristagency.users (user_name, user_login, user_password, user_salt) values (?, ?, ?, ?)";
+            PreparedStatement prepInsert = connection.prepareStatement(queryInsert);
+            prepInsert.setString(1, name);
+            prepInsert.setString(2, login);
+            prepInsert.setString(3, bytesToHex(answer.get(0)));
+            prepInsert.setString(4, bytesToHex(answer.get(1)));
+            prepInsert.execute();
+            check = true;
+        }
+        return check;
     }
 
     /* Добавление нового тура в БД */
@@ -130,7 +130,7 @@ public class DBProcessor {
     }
 
     /* Удаление тура из БД */
-    public void deleteTour(Connection connection, int tour_id) throws SQLException {
+    public void deleteTour(int tour_id) throws SQLException {
         String queryDelete = "delete from touristagency.tours where tour_id = ?";
         PreparedStatement prepDelete = connection.prepareStatement(queryDelete);
         prepDelete.setInt(1, tour_id);
@@ -138,7 +138,7 @@ public class DBProcessor {
     }
 
     /* Добавление нового заказа в БД */
-    public void addOrder(Connection connection, int user_id, int tour_id) throws SQLException {
+    public static void addOrder(int user_id, int tour_id) throws SQLException {
         String queryInsert = "insert into touristagency.orders (user_id, tour_id) values (?, ?)";
         PreparedStatement prepInsert = connection.prepareStatement(queryInsert);
         prepInsert.setInt(1, user_id);
@@ -146,8 +146,19 @@ public class DBProcessor {
         prepInsert.execute();
     }
 
+    public static int getTourId(String tour_name) throws SQLException {
+        String query = "select tour_id from touristagency.tours where tour_name = ?";
+        PreparedStatement prepInsert = connection.prepareStatement(query);
+        prepInsert.setString(1, tour_name);
+        ResultSet resSet = prepInsert.executeQuery();
+        if (resSet.next()) {
+            return resSet.getInt("tour_id");
+        }
+        return 0;
+    }
+
     /* Удаление заказа из БД */
-    public void deleteOrder(Connection connection, int order_id) throws SQLException {
+    public void deleteOrder(int order_id) throws SQLException {
         String queryDelete = "delete from touristagency.orders where order_id = ?";
         PreparedStatement prepDelete = connection.prepareStatement(queryDelete);
         prepDelete.setInt(1, order_id);
