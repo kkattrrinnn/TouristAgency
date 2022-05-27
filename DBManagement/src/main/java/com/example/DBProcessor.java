@@ -6,22 +6,25 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DBProcessor {
-    private Connection connection;
+
+    private static final String USERNAME = "test";
+    private static final String PASSWORD = "Hhf:W7N+at";
+    private static final String URL = "jdbc:mysql://192.168.10.63:3306/MySQL";
+    private static final String URLFIXED = URL + "?useSSL=false&serverTimezone=UTC";
+
+    private static Connection connection;
     public DBProcessor() throws SQLException {
         DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());                                           // создание и регистрация драйвера
     }
-    public Connection getConnection(String url, String username, String password) throws SQLException {         // соединение с БД
+    public static Connection getConnection() throws SQLException {         // соединение с БД
         if (connection != null)
             return connection;
-        connection = DriverManager.getConnection(url, username, password);
+        connection = DriverManager.getConnection(URLFIXED, USERNAME, PASSWORD);
         return connection;
     }
     //[B@13eb8acf
@@ -95,6 +98,35 @@ public class DBProcessor {
         prepInsert.setInt(5, duration);
         prepInsert.setInt(6, price);
         prepInsert.execute();
+    }
+
+    public static String[] getTours() throws SQLException {
+        ArrayList<String> answer = new ArrayList<String>();
+        answer.add("Выберите тур");
+        String query = "select tour_name from touristagency.tours";
+        PreparedStatement prepStat = getConnection().prepareStatement(query);
+        ResultSet resSet = prepStat.executeQuery();
+        while (resSet.next()) {
+            answer.add(resSet.getString("tour_name"));
+        }
+        String[] a = answer.toArray(new String[0]);
+        return a;
+    }
+
+    public static ArrayList<String> getInfoAboutTheTour(String name) throws SQLException {
+        ArrayList<String> answer = new ArrayList<String>();
+        String query = "select starting_point, final_point, date, duration, price from touristagency.tours where tour_name = ?";
+        PreparedStatement prepQuery = connection.prepareStatement(query);
+        prepQuery.setString(1, name);
+        ResultSet resSet = prepQuery.executeQuery();
+        while (resSet.next()) {
+            answer.add(resSet.getString("starting_point"));
+            answer.add(resSet.getString("final_point"));
+            answer.add(resSet.getString("date"));
+            answer.add(String.valueOf(resSet.getInt("duration")));
+            answer.add(String.valueOf(resSet.getInt("price")));
+        }
+        return answer;
     }
 
     /* Удаление тура из БД */

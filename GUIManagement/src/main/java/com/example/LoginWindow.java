@@ -19,6 +19,7 @@ public class LoginWindow extends GraphicsWindow {
     JLabel error_no_password;
     int x = 400 , y = 160, width = 400 , height = 80;
     public ArrayList<String> login_data;
+    public int id;
     LoginWindow() {
 //-----------------------------------------------------------------
         this.error_no_password = new JLabel("Неверный пароль"); // сообщение об ошибке
@@ -59,12 +60,14 @@ public class LoginWindow extends GraphicsWindow {
         this.ent_button_input.addActionListener(e -> {        // обработка нажатия
             login_data = getData();
             try {
-                if (Server.authorization(login_data.get(0), login_data.get(1))) {
+                this.id = Server.authorization(login_data.get(0), login_data.get(1));
+                if (this.id != 0) {
                     this.jPanel.removeAll();                         // очистка панели
                     this.jPanel.repaint();
                     this.jPanel.revalidate();
+                    System.out.println(this.id);
                     delFrame();
-                    MainPage MP = new MainPage();
+                    MainPage MP = new MainPage(this.id);
                 }
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
@@ -73,7 +76,7 @@ public class LoginWindow extends GraphicsWindow {
         this.jPanel.add(this.ent_button_input);
 
 //-----------------------------------------------------------------
-        this.Will_come_back_button = new JButton("Вернутся");
+        this.Will_come_back_button = new JButton("Вернуться");
         this.Will_come_back_button.setBounds(x - 270, y + 4 * height, width, height);
         this.Will_come_back_button.setBackground(new Color(255, 128, 128, 90));
         this.Will_come_back_button.setFont(BigFontCS);
@@ -96,6 +99,5 @@ public class LoginWindow extends GraphicsWindow {
             data.add(this.password_input.getText());
         }
         return data;
-
     }
 }

@@ -91,15 +91,4 @@ public class RegistrationWindow extends GraphicsWindow{
     }
 //----------------------------------------------------------------
 
-
-    public Boolean getEntrance() {
-        return this.entrance_Register;
-    }
-    public ArrayList<String> getData() {
-        ArrayList<String> data = new ArrayList<>(2);
-        data.add(this.login_Register.getText());
-        data.add(this.password_Register.getText());
-        return data;
-
-    }
 }

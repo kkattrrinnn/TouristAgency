@@ -7,10 +7,6 @@ import java.util.List;
 
 public class Server {
 
-    private static final String USERNAME = "test";
-    private static final String PASSWORD = "Hhf:W7N+at";
-    private static final String URL = "jdbc:mysql://192.168.10.63:3306/MySQL";
-    private static final String URLFIXED = URL + "?useSSL=false&serverTimezone=UTC";
     public static boolean loop = true;
     public static Connection connection;
     public static DBProcessor db;
@@ -22,8 +18,6 @@ public class Server {
             throw new RuntimeException(e);
         }
     }
-
-    ;
 
     public static void main(String[] args) throws SQLException {
 
@@ -60,17 +54,17 @@ public class Server {
         connection.close();
     }
 
-    public static boolean authorization(String login, String password) throws SQLException {
+    public static int authorization(String login, String password) throws SQLException {
         /* Поиск пользователя по логину */
         String query = "select user_id from touristagency.users where user_login=?";
-        PreparedStatement prepQuery = db.getConnection(URLFIXED, USERNAME, PASSWORD).prepareStatement(query);
+        PreparedStatement prepQuery = db.getConnection().prepareStatement(query);
         prepQuery.setString(1,login);
         ResultSet resSet = prepQuery.executeQuery();
         /* Если логин найден - проверка пароля */
         if (resSet.next()) {
             int id = resSet.getInt("user_id");
             query = "select user_password, user_salt from touristagency.users where user_id=?";
-            prepQuery = db.getConnection(URLFIXED, USERNAME, PASSWORD).prepareStatement(query);
+            prepQuery = db.getConnection().prepareStatement(query);
             prepQuery.setInt(1,id);
             resSet = prepQuery.executeQuery();
             if (resSet.next()) {
@@ -78,14 +72,13 @@ public class Server {
                 String salt = resSet.getString("user_salt");
                 List<byte[]> answer = DBProcessor.hashGeneration(password, salt);
                 if (DBProcessor.bytesToHex(answer.get(0)).equals(psw)) {
-                    return true;
+                    return id;
                 } else {
-                    System.out.println("1 "+DBProcessor.bytesToHex(answer.get(0)));
-                    System.out.println("2 "+psw);
+                    return 0;
                 }
             }
         }
-        return false;
+        return 0;
     }
 
 
