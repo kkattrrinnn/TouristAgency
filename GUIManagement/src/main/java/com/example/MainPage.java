@@ -38,9 +38,10 @@ public class MainPage extends GraphicsWindow{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        this.jPanel.add(this.box_tur);
         this.box_tur.setFont(BigFontCS);
         this.box_tur.setBounds(x-100,y+100,width+100,height);
-        this.jPanel.add(this.box_tur);
+
 //-----------------------------------------------------------------
         ActionListener actionListener = new ActionListener() { // отслеживаем элемент
             public void actionPerformed(ActionEvent e) {
@@ -51,6 +52,8 @@ public class MainPage extends GraphicsWindow{
         this.box_tur.addActionListener(actionListener);
 //-----------------------------------------------------------------
         this.Book_a_tour = new JButton("Подробнее");
+        this.jPanel.add(this.Book_a_tour);
+
         this.Book_a_tour.setBounds(x-50, y+3*height, width, height);
         this.Book_a_tour.setBackground(new Color(255, 128, 128, 90));
         this.Book_a_tour.setFont(BigFontCS);
@@ -67,11 +70,12 @@ public class MainPage extends GraphicsWindow{
                 }
             }
         });
-        this.jPanel.add(this.Book_a_tour);
-//-----------------------------------------------------------------
 
+//-----------------------------------------------------------------
         if (this.id == 0) {
             this.ent_button_MainPage = new JButton("Авторизация");
+            this.jPanel.add(this.ent_button_MainPage);
+
             this.ent_button_MainPage.setBounds(x + 200, y + 4 * height + 30, width, height);
             this.ent_button_MainPage.setBackground(new Color(200, 100, 250, 90));
             this.ent_button_MainPage.setFont(BigFontCS);
@@ -82,10 +86,10 @@ public class MainPage extends GraphicsWindow{
                 delFrame();
                 new LoginWindow();
             });
-            this.jPanel.add(this.ent_button_MainPage);
-
 //-----------------------------------------------------------------
             this.reg_button = new JButton("Регистрация");
+            this.jPanel.add(this.reg_button);
+
             this.reg_button.setBounds(x - 280, y + 4 * height + 30, width, height);
             this.reg_button.setBackground(new Color(200, 100, 250, 90));
             this.reg_button.setFont(BigFontCS);
@@ -96,7 +100,6 @@ public class MainPage extends GraphicsWindow{
                 delFrame();
                 new RegistrationWindow();
             });
-            this.jPanel.add(this.reg_button);
         }else{
             this.reg_button = new JButton("Выйти из акаунта");
             this.reg_button.setBounds(x+200, y + 4 * height + 30, width, height);
@@ -111,7 +114,11 @@ public class MainPage extends GraphicsWindow{
             });
             this.jPanel.add(this.reg_button);
  //----------------------------------------------------------------
-            this.Tour_design = new JButton("Мои туры");
+            if (this.id == 19){
+                this.Tour_design = new JButton("Менеджмент");
+            }else this.Tour_design = new JButton("Мои туры");
+            this.jPanel.add(this.Tour_design);
+
             this.Tour_design.setBounds(x - 280, y + 4 * height + 30, width, height);
             this.Tour_design.setBackground(new Color(255, 128, 128, 90));
             this.Tour_design.setFont(BigFontCS);
@@ -125,11 +132,12 @@ public class MainPage extends GraphicsWindow{
                     } catch (SQLException ex) {
                         throw new RuntimeException(ex);
                     }
-                    new MyTours(this.id);
+                    if (this.id ==19){
+                        new TourManagement(this.id);
+                    }else new MyTours(this.id);
             });
-            this.jPanel.add(this.Tour_design);
-        }
 
-//----------------------------------------------------------------
         }
+//----------------------------------------------------------------
+    }
 }

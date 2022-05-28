@@ -68,7 +68,7 @@ public class OrderingTure extends GraphicsWindow{
             this.jPanel.repaint();
             this.jPanel.revalidate();
             delFrame();
-            new MainPage();
+            new MainPage(this.id);
         });
         this.jPanel.add(this.Will_come_back_button);
 //----------------------------------------------------------------
