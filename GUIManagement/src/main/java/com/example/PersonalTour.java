@@ -56,7 +56,7 @@ public class PersonalTour extends GraphicsWindow{
 
         this.Will_come_back_button = new JButton("К турам");
         this.Will_come_back_button.setBounds(x-150, y+480, width-550, height);
-        this.Will_come_back_button.setBackground(new Color(255, 128, 128, 90));
+        this.Will_come_back_button.setForeground(Color.BLACK);;
         this.Will_come_back_button.setFont(BigFontCS);
         this.Will_come_back_button.addActionListener(e -> {        // обработка нажатия
             this.jPanel.removeAll();                         // очистка панели
@@ -71,7 +71,7 @@ public class PersonalTour extends GraphicsWindow{
 //----------------------------------------------------------------
         this.Tour_design = new JButton("Отменить тур");
         this.Tour_design.setBounds(x+250, y+480, width-550, height);
-        this.Tour_design.setBackground(new Color(255, 128, 128, 90));
+        this.Tour_design.setForeground(Color.BLACK);;
         this.Tour_design.setFont(BigFontCS);
         this.Tour_design.addActionListener(e -> {        // обработка нажатия
             this.jPanel.removeAll();                         // очистка панели

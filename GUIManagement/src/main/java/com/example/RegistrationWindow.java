@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class RegistrationWindow extends GraphicsWindow{
     Font BigFontCS = new Font("ComicSans", Font.BOLD, 40);
     JTextField login_Register;
-    JTextField password_Register;
+    JPasswordField password_Register;
     JTextField Name_Register;
     JButton ent_button_Register;
     JButton Will_come_back_button;
@@ -66,7 +66,7 @@ public class RegistrationWindow extends GraphicsWindow{
         this.labelPassword_Register.setBounds(x-330, y+2*height+20, width, height);
         this.jPanel.add(this.labelPassword_Register);
 
-        this.password_Register = new JTextField();
+        this.password_Register = new JPasswordField();
         this.password_Register.setBounds(x, y+2*height+20, width, height);
         this.password_Register.setFont(BigFontCS);
         this.jPanel.add(this.password_Register);
@@ -74,7 +74,7 @@ public class RegistrationWindow extends GraphicsWindow{
 
         this.ent_button_Register = new JButton("Зарегистрироваться");
         this.ent_button_Register.setBounds(x+100, y+4*height+30, width+50, height);
-        this.ent_button_Register.setBackground(new Color(255, 128, 128, 90));
+        this.ent_button_Register.setForeground(Color.BLACK);
         this.ent_button_Register.setFont(BigFontCS);
         this.ent_button_Register.addActionListener(e -> {        // обработка нажатия
             ArrayList<String> registration_data = getData();
@@ -94,7 +94,7 @@ public class RegistrationWindow extends GraphicsWindow{
 //-----------------------------------------------------------------
         this.Will_come_back_button = new JButton("Вернуться");
         this.Will_come_back_button.setBounds(x-350, y+4*height+30, width-50, height);
-        this.Will_come_back_button.setBackground(new Color(255, 128, 128, 90));
+        this.Will_come_back_button.setForeground(Color.BLACK);
         this.Will_come_back_button.setFont(BigFontCS);
         this.Will_come_back_button.addActionListener(e -> {        // обработка нажатия
             this.jPanel.removeAll();                         // очистка панели

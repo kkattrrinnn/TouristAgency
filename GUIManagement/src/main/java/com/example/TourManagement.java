@@ -52,7 +52,7 @@ public class TourManagement extends GraphicsWindow{
 //-----------------------------------------------------------------
         this.Book_a_tour = new JButton("Редактировать");
         this.Book_a_tour.setBounds(x, y+4*height, width, height);
-        this.Book_a_tour.setBackground(new Color(255, 128, 128, 90));
+        this.Book_a_tour.setForeground(Color.BLACK);;
         this.Book_a_tour.setFont(BigFontCS);
         this.Book_a_tour.addActionListener(e -> {                   // обработка нажатия
             if (Tur_name != null){                                  //если тур не был выбран
@@ -60,18 +60,14 @@ public class TourManagement extends GraphicsWindow{
                 this.jPanel.repaint();
                 this.jPanel.revalidate();   //сделать редактирования если захотим
                 delFrame();
-                try {
-                    new PersonalTour(this.id, Tur_name, DBProcessor.getInfoAboutTheTour(Tur_name));
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
-                }
+                new EditTour(this.id);
             }
         });
         this.jPanel.add(this.Book_a_tour);
 //-----------------------------------------------------------------
         this.Will_come_back_button = new JButton("Вернутся");
         this.Will_come_back_button.setBounds(x-350, y+4*height, width, height);
-        this.Will_come_back_button.setBackground(new Color(255, 128, 128, 90));
+        this.Will_come_back_button.setForeground(Color.BLACK);;
         this.Will_come_back_button.setFont(BigFontCS);
         this.Will_come_back_button.addActionListener(e -> {        // обработка нажатия
             this.jPanel.removeAll();                         // очистка панели
@@ -84,7 +80,20 @@ public class TourManagement extends GraphicsWindow{
 //-----------------------------------------------------------------
         this.delete_tour = new JButton("Удалить");
         this.delete_tour.setBounds(x+350, y+4*height, width, height);
-        this.delete_tour.setBackground(new Color(255, 128, 128, 90));
+        this.delete_tour.setForeground(Color.BLACK);;
+        this.delete_tour.setFont(BigFontCS);
+        this.delete_tour.addActionListener(e -> {        // обработка нажатия
+            this.jPanel.removeAll();                         // очистка панели
+            this.jPanel.repaint();
+            this.jPanel.revalidate();  //сделать удаление
+            delFrame();
+            new TourManagement(this.id);
+        });
+        this.jPanel.add(this.delete_tour);
+//-----------------------------------------------------------------
+        this.delete_tour = new JButton("Добавить");
+        this.delete_tour.setBounds(x+350, y+5*height+30, width, height);
+        this.delete_tour.setForeground(Color.BLACK);
         this.delete_tour.setFont(BigFontCS);
         this.delete_tour.addActionListener(e -> {        // обработка нажатия
             this.jPanel.removeAll();                         // очистка панели
@@ -96,8 +105,8 @@ public class TourManagement extends GraphicsWindow{
         this.jPanel.add(this.delete_tour);
 
         this.reg_button = new JButton("Выйти из акаунта");
-        this.reg_button.setBounds(x, y + 5 * height + 50, width, height);
-        this.reg_button.setBackground(new Color(200, 100, 250, 90));
+        this.reg_button.setBounds(x, y + 5 * height + 30, width, height);
+        this.reg_button.setForeground(Color.BLACK);
         this.reg_button.setFont(BigFontCS);
         this.reg_button.addActionListener(e -> {        // обработка нажатия
             this.jPanel.removeAll();                         // очистка панели

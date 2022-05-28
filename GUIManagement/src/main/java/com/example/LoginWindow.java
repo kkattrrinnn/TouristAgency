@@ -8,7 +8,7 @@ public class LoginWindow extends GraphicsWindow {
 
     Font BigFontCS = new Font("ComicSans", Font.BOLD, 40);
     JTextField login;
-    JTextField password_input;
+    JPasswordField password_input;
     JButton ent_button_input;
     JButton Will_come_back_button;
     JLabel labelLogin_input;
@@ -54,14 +54,14 @@ public class LoginWindow extends GraphicsWindow {
         this.labelPassword_input.setBounds(x - 330, y + 2 * height, width, height);
         this.jPanel.add(this.labelPassword_input);
 //-----------------------------------------------------------------
-        this.password_input = new JTextField();
+        this.password_input = new JPasswordField();
         this.password_input.setBounds(x, y + 2 * height, width, height);
         this.password_input.setFont(BigFontCS);
         this.jPanel.add(this.password_input);
 //-----------------------------------------------------------------
         this.ent_button_input = new JButton("Войти");
         this.ent_button_input.setBounds(x+150, y + 4 * height, width, height);
-        this.ent_button_input.setBackground(new Color(255, 128, 128, 90));
+        this.ent_button_input.setForeground(Color.BLACK);
         this.ent_button_input.setFont(BigFontCS);
         this.ent_button_input.addActionListener(e -> {        // обработка нажатия
             login_data = getData();
@@ -85,7 +85,7 @@ public class LoginWindow extends GraphicsWindow {
 //-----------------------------------------------------------------
         this.Will_come_back_button = new JButton("Вернуться");
         this.Will_come_back_button.setBounds(x - 270, y + 4 * height, width, height);
-        this.Will_come_back_button.setBackground(new Color(255, 128, 128, 90));
+        this.Will_come_back_button.setForeground(Color.BLACK);
         this.Will_come_back_button.setFont(BigFontCS);
         this.Will_come_back_button.addActionListener(e -> {        // обработка нажатия
             this.jPanel.removeAll();                         // очистка панели

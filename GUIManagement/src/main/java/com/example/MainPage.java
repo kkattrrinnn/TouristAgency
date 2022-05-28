@@ -55,7 +55,7 @@ public class MainPage extends GraphicsWindow{
         this.jPanel.add(this.Book_a_tour);
 
         this.Book_a_tour.setBounds(x-50, y+3*height, width, height);
-        this.Book_a_tour.setBackground(new Color(255, 128, 128, 90));
+        this.Book_a_tour.setForeground(Color.BLACK);
         this.Book_a_tour.setFont(BigFontCS);
         this.Book_a_tour.addActionListener(e -> {                   // обработка нажатия
             if (Tur_name != null){                                  //если тур не был выбран
@@ -77,7 +77,7 @@ public class MainPage extends GraphicsWindow{
             this.jPanel.add(this.ent_button_MainPage);
 
             this.ent_button_MainPage.setBounds(x + 200, y + 4 * height + 30, width, height);
-            this.ent_button_MainPage.setBackground(new Color(200, 100, 250, 90));
+            this.ent_button_MainPage.setForeground(Color.BLACK);
             this.ent_button_MainPage.setFont(BigFontCS);
             this.ent_button_MainPage.addActionListener(e -> {        // обработка нажатия
                 this.jPanel.removeAll();                         // очистка панели
@@ -91,7 +91,7 @@ public class MainPage extends GraphicsWindow{
             this.jPanel.add(this.reg_button);
 
             this.reg_button.setBounds(x - 280, y + 4 * height + 30, width, height);
-            this.reg_button.setBackground(new Color(200, 100, 250, 90));
+            this.reg_button.setForeground(Color.BLACK);
             this.reg_button.setFont(BigFontCS);
             this.reg_button.addActionListener(e -> {        // обработка нажатия
                 this.jPanel.removeAll();                         // очистка панели
@@ -103,7 +103,7 @@ public class MainPage extends GraphicsWindow{
         }else{
             this.reg_button = new JButton("Выйти из акаунта");
             this.reg_button.setBounds(x+200, y + 4 * height + 30, width, height);
-            this.reg_button.setBackground(new Color(200, 100, 250, 90));
+            this.reg_button.setForeground(Color.BLACK);
             this.reg_button.setFont(BigFontCS);
             this.reg_button.addActionListener(e -> {        // обработка нажатия
                 this.jPanel.removeAll();                         // очистка панели
@@ -120,7 +120,7 @@ public class MainPage extends GraphicsWindow{
             this.jPanel.add(this.Tour_design);
 
             this.Tour_design.setBounds(x - 280, y + 4 * height + 30, width, height);
-            this.Tour_design.setBackground(new Color(255, 128, 128, 90));
+            this.Tour_design.setForeground(Color.BLACK);
             this.Tour_design.setFont(BigFontCS);
             this.Tour_design.addActionListener(e -> {        // обработка нажатия
                 this.jPanel.removeAll();                         // очистка панели
