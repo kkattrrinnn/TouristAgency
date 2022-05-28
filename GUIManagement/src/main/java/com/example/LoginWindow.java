@@ -27,16 +27,10 @@ public class LoginWindow extends GraphicsWindow {
     }
 
     void constructor() {
-        //-----------------------------------------------------------------
-        this.error_no_password = new JLabel("Неверный пароль"); // сообщение об ошибке
-        this.error_no_password.setFont(BigFontCS);
-        this.error_no_password.setForeground(Color.red);
-        this.error_no_password.setBounds(x, y + 4 * height + 50, width, height);
-        this.jPanel.add(this.error_no_password);
 //-----------------------------------------------------------------
         this.label_hello_input = new JLabel("Авторизация");
         this.label_hello_input.setFont(BigFontCS);
-        this.label_hello_input.setBounds(x, y - 60, width = 400, height = 60);
+        this.label_hello_input.setBounds(x, y - 100, width = 400, height = 60);
         this.jPanel.add(this.label_hello_input);
 //-----------------------------------------------------------------
         this.labelLogin_input = new JLabel("Введите логин");
@@ -67,6 +61,7 @@ public class LoginWindow extends GraphicsWindow {
             login_data = getData();
             try {
                 this.id = Server.authorization(login_data.get(0), login_data.get(1));
+
                 if (this.id != 0) {
                     this.jPanel.removeAll();                         // очистка панели
                     this.jPanel.repaint();
@@ -75,6 +70,15 @@ public class LoginWindow extends GraphicsWindow {
                     if (this.id == 19){
                         new TourManagement(this.id);
                     }else new MainPage(this.id);   //сделать если зашел админ
+                } else {
+                    this.error_no_password = new JLabel("Неверные данные"); // сообщение об ошибке
+                    this.error_no_password.setVisible(true);
+                    this.error_no_password.setFont(BigFontCS);
+                    this.error_no_password.setForeground(Color.red);
+                    this.error_no_password.setBounds(x, y + 4 * height + 100, width, height);
+                    this.jPanel.add(this.error_no_password);
+                    this.jPanel.repaint();
+
                 }
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);

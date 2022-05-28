@@ -17,7 +17,6 @@ public class RegistrationWindow extends GraphicsWindow{
     JLabel labelPassword_Register;
     JLabel label_hello_Register;
 
-    JLabel error_no_login;
     int x = 400 , y = 190, width = 400 , height = 60;
 
     public RegistrationWindow(int id) {
@@ -29,16 +28,10 @@ public class RegistrationWindow extends GraphicsWindow{
     }
 
     void constructor() {
-        //-----------------------------------------------------------------
-        this.error_no_login = new JLabel("Пользователь не обнаружен, зарегистрируйтесь");  // сообщение об ошибке
-        this.error_no_login.setFont(BigFontCS);
-        this.error_no_login.setForeground(Color.red);
-        this.error_no_login.setBounds(x-350,y-110,width = 1000 , height = 60);
-        this.jPanel.add(this.error_no_login);
 //-----------------------------------------------------------------
         this.label_hello_Register = new JLabel("Регистрация");
         this.label_hello_Register.setFont(BigFontCS);
-        this.label_hello_Register.setBounds(x,y-60,width = 400 , height = 60);
+        this.label_hello_Register.setBounds(x,y-100,width = 400 , height = 60);
         this.jPanel.add(this.label_hello_Register);
 //-----------------------------------------------------------------
         this.labelName_Register = new JLabel("Введите имя");

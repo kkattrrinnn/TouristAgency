@@ -16,6 +16,7 @@ public class MainPage extends GraphicsWindow{
     JButton reg_button;
 
     JButton Tour_design;
+    JLabel error_no_tour;
 
     MainPage(int id) {
         this.id = id;
@@ -68,6 +69,14 @@ public class MainPage extends GraphicsWindow{
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
+            }else {
+                this.error_no_tour = new JLabel("Тур не выбран"); // сообщение об ошибке
+                this.error_no_tour.setVisible(true);
+                this.error_no_tour.setFont(BigFontCS);
+                this.error_no_tour.setForeground(Color.red);
+                this.error_no_tour.setBounds(x, y + 4 * height + 100, width, height);
+                this.jPanel.add(this.error_no_tour);
+                this.jPanel.repaint();
             }
         });
 

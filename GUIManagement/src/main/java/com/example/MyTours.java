@@ -14,6 +14,7 @@ public class MyTours extends GraphicsWindow{
     JButton Book_a_tour;
     JLabel label_hello_input;
     JButton Will_come_back_button;
+    JLabel error_no_tour;
     int x = 400 , y = 60, width = 400 , height = 80;
     Font BigFontCS = new Font("ComicSans", Font.BOLD, 30);
     public MyTours() {
@@ -63,6 +64,14 @@ public class MyTours extends GraphicsWindow{
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
+            } else {
+                this.error_no_tour = new JLabel("Тур не выбран"); // сообщение об ошибке
+                this.error_no_tour.setVisible(true);
+                this.error_no_tour.setFont(BigFontCS);
+                this.error_no_tour.setForeground(Color.red);
+                this.error_no_tour.setBounds(x, y + 4 * height + 100, width, height);
+                this.jPanel.add(this.error_no_tour);
+                this.jPanel.repaint();
             }
         });
         this.jPanel.add(this.Book_a_tour);
