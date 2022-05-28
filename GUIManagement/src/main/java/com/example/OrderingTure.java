@@ -36,27 +36,21 @@ public class OrderingTure extends GraphicsWindow{
         this.label_Tur_name.setFont(BigFontCS);
         this.label_Tur_name.setBounds(x-200, y+160, width, height);
         this.jPanel.add(this.label_Tur_name);
-
-
 //-----------------------------------------------------------------
         this.label_Tur_name = new JLabel("Дата отправления: " + tours.get(2));
         this.label_Tur_name.setFont(BigFontCS);
         this.label_Tur_name.setBounds(x-200, y+240, width, height);
         this.jPanel.add(this.label_Tur_name);
-
 //-----------------------------------------------------------------
-
         this.label_Tur_name = new JLabel("Продолжительность тура: " + tours.get(3) + " days");
         this.label_Tur_name.setFont(BigFontCS);
         this.label_Tur_name.setBounds(x-200, y+320, width, height);
         this.jPanel.add(this.label_Tur_name);
-
 //-----------------------------------------------------------------
         this.label_Tur_name = new JLabel("Стоимость тура: " + tours.get(4));
         this.label_Tur_name.setFont(BigFontCS);
         this.label_Tur_name.setBounds(x-200, y+400, width, height);
         this.jPanel.add(this.label_Tur_name);
-
 //-----------------------------------------------------------------
         this.Will_come_back_button = new JButton("Вернуться");
         this.Will_come_back_button.setBounds(x-150, y+480, width-550, height);
@@ -91,11 +85,7 @@ public class OrderingTure extends GraphicsWindow{
                 System.out.println("Вы не вошли в систему!");
                 new LoginWindow();
             }
-
         });
         this.jPanel.add(this.Tour_design);
     }
-
-//----------------------------------------------------------------
-
 }

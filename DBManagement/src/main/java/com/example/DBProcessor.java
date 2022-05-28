@@ -97,11 +97,11 @@ public class DBProcessor {
     }
 
     /* Добавление нового тура в БД */
-    public static void addTour(Connection connection, String name, String starting_point, String final_point,
+    public static void addTour(String name, String starting_point, String final_point,
                                String date, int duration, int price) throws SQLException {
         String queryInsert = "insert into touristagency.tours (tour_name, starting_point, final_point, " +
                             "date, duration, price) values (?, ?, ?, ?, ?, ?)";
-        PreparedStatement prepInsert = connection.prepareStatement(queryInsert);
+        PreparedStatement prepInsert = getConnection().prepareStatement(queryInsert);
         prepInsert.setString(1, name);
         prepInsert.setString(2, starting_point);
         prepInsert.setString(3, final_point);

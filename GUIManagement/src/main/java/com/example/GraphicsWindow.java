@@ -28,7 +28,6 @@ public class GraphicsWindow{
 
         this.jPanel = new JPanel();      // создание панели
         this.jPanel.setSize(1100, 700);
-        this.jPanel.setBackground(Color.red);
         this.jPanel.setVisible(true);
         this.jPanel.setLayout(null);
         this.jFrame.add(this.jPanel);
@@ -50,9 +49,5 @@ public class GraphicsWindow{
 
     public void delFrame() {
         this.jFrame.dispose();
-    }
-
-    public static void main(String[] args) {
-        GraphicsWindow GW = new GraphicsWindow();
     }
 }

@@ -2,6 +2,7 @@ package com.example;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.SQLException;
 
 public class AddTour extends GraphicsWindow{
 
@@ -18,7 +19,8 @@ public class AddTour extends GraphicsWindow{
     JTextField Duration_input;
     JLabel labelPrice_input;
     JTextField Price_input;
-   JButton delete_tour;
+    JLabel error_data;
+   JButton add_tour;
 
 
     AddTour(int id) {
@@ -97,18 +99,34 @@ public class AddTour extends GraphicsWindow{
         this.Price_input.setFont(BigFontCS);
         this.jPanel.add(this.Price_input);
 //-----------------------------------------------------------------
-        this.delete_tour = new JButton("Добавить тур");
-        this.delete_tour.setBounds(x + 250, y + 7 * height, width, height);
-        this.delete_tour.setForeground(Color.BLACK);
-        this.delete_tour.setFont(BigFontCS);
-        this.delete_tour.addActionListener(e -> {        // обработка нажатия
-            this.jPanel.removeAll();                         // очистка панели
+        this.add_tour = new JButton("Добавить тур");
+        this.add_tour.setBounds(x + 250, y + 7 * height, width, height);
+        this.add_tour.setForeground(Color.BLACK);
+        this.add_tour.setFont(BigFontCS);
+        this.add_tour.addActionListener(e -> {        // обработка нажатия
+            if (checkData()) {
+                try {
+                    DBProcessor.addTour(this.Name.getText(), this.Starting_input.getText(), this.Final_input.getText(),
+                                        this.Date_input.getText(), Integer.parseInt(this.Duration_input.getText()), Integer.parseInt(this.Price_input.getText()));
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+                new AddTour(this.id);
+                this.jPanel.removeAll();                         // очистка панели
+                this.jPanel.repaint();
+                this.jPanel.revalidate();
+                delFrame();
+            } else {
+                this.error_data = new JLabel("Неверные данные"); // сообщение об ошибке
+                this.error_data.setVisible(true);
+                this.error_data.setFont(BigFontCS);
+                this.error_data.setForeground(Color.red);
+                this.error_data.setBounds(x, y - 50, width, height);
+                this.jPanel.add(this.error_data);
+            }
             this.jPanel.repaint();
-            this.jPanel.revalidate();  //сделать удаление
-            delFrame();
-            new AddTour(this.id);
         });
-        this.jPanel.add(this.delete_tour);
+        this.jPanel.add(this.add_tour);
 //-----------------------------------------------------------------
         this.Will_come_back_button = new JButton("Вернуться");
         this.Will_come_back_button.setBounds(x - 250, y + 7 * height, width, height);
@@ -123,5 +141,22 @@ public class AddTour extends GraphicsWindow{
         });
         this.jPanel.add(this.Will_come_back_button);
 //-----------------------------------------------------------------
+    }
+
+    public boolean checkData() {
+        if (this.Name.getText() == null || this.Name.getText().equals("")) {
+            return false;
+        } else if (this.Starting_input.getText() == null || this.Starting_input.getText().equals("")) {
+            return false;
+        } else if (this.Final_input.getText() == null || this.Final_input.getText().equals("")) {
+            return false;
+        } else if (this.Date_input.getText() == null || this.Date_input.getText().equals("")) {
+            return false;
+        } else if (this.Duration_input.getText() == null || this.Duration_input.getText().equals("")) {
+            return false;
+        } else if (this.Price_input.getText() == null || this.Price_input.getText().equals("")) {
+            return false;
+        }
+        return true;
     }
 }

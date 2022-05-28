@@ -90,6 +90,5 @@ public class MyTours extends GraphicsWindow{
             new MainPage(this.id);
         });
         this.jPanel.add(this.Will_come_back_button);
-//-----------------------------------------------------------------
     }
 }

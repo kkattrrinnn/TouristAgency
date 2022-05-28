@@ -20,28 +20,12 @@ public class Server {
     }
 
     public static void main(String[] args) throws SQLException {
-
-        //db.addUser(connection, "root", "root", "root");
-        //System.out.println(authorization("root", "root"));
-        //System.out.println(authorization("Mary", "mary"));
-        /*String query = "select * from touristagency.tours";
-        Statement stat = connection.createStatement();
-        ResultSet resSet = stat.executeQuery(query);
-        while (resSet.next()) {
-            System.out.println(resSet.getString("tour_name"));
-        }*/
-
         try (ServerSocket server = new ServerSocket(8000))                                     // серверный сокет - он один!
         {
             System.out.println("Server started!");
             while (loop) {
                 Phone phone = new Phone(server);                                                    // для каждого нового клиента новый сокет
                 new Thread(() -> {                                                                  // отдельный новый поток для каждого клиента
-
-                    //String request = phone.readLine();
-                    //String response = (int) (Math.random() * 30 - 10) + "";
-                    //try {Thread.sleep(4000);} catch (InterruptedException e) { throw new RuntimeException(e);}
-                    //phone.writeLine(response);
                     try {
                         phone.close();
                     } catch (IOException e) { throw new RuntimeException(e);}

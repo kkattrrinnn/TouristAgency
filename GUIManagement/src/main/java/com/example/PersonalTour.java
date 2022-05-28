@@ -52,7 +52,6 @@ public class PersonalTour extends GraphicsWindow{
         this.label_Tur_name.setBounds(x-200, y+400, width, height);
         this.jPanel.add(this.label_Tur_name);
 //-----------------------------------------------------------------
-
         this.Will_come_back_button = new JButton("К турам");
         this.Will_come_back_button.setBounds(x-150, y+480, width-550, height);
         this.Will_come_back_button.setForeground(Color.BLACK);;
@@ -89,7 +88,4 @@ public class PersonalTour extends GraphicsWindow{
         });
         this.jPanel.add(this.Tour_design);
     }
-
-//----------------------------------------------------------------
-
 }

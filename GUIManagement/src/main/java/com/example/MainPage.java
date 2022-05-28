@@ -77,7 +77,6 @@ public class MainPage extends GraphicsWindow{
                 this.jPanel.repaint();
             }
         });
-
 //-----------------------------------------------------------------
         if (this.id == 0) {
             this.ent_button_MainPage = new JButton("Авторизация");
@@ -96,7 +95,6 @@ public class MainPage extends GraphicsWindow{
 //-----------------------------------------------------------------
             this.reg_button = new JButton("Регистрация");
             this.jPanel.add(this.reg_button);
-
             this.reg_button.setBounds(x - 280, y + 4 * height + 30, width, height);
             this.reg_button.setForeground(Color.BLACK);
             this.reg_button.setFont(BigFontCS);
@@ -125,7 +123,6 @@ public class MainPage extends GraphicsWindow{
                 this.Tour_design = new JButton("Менеджмент");
             }else this.Tour_design = new JButton("Мои туры");
             this.jPanel.add(this.Tour_design);
-
             this.Tour_design.setBounds(x - 280, y + 4 * height + 30, width, height);
             this.Tour_design.setForeground(Color.BLACK);
             this.Tour_design.setFont(BigFontCS);

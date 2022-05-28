@@ -62,7 +62,6 @@ public class RegistrationWindow extends GraphicsWindow{
         this.password_Register.setFont(BigFontCS);
         this.jPanel.add(this.password_Register);
 //-----------------------------------------------------------------
-
         this.ent_button_Register = new JButton("Зарегистрироваться");
         this.ent_button_Register.setBounds(x+100, y+4*height+30, width+50, height);
         this.ent_button_Register.setForeground(Color.BLACK);

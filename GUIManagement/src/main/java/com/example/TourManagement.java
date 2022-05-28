@@ -113,7 +113,7 @@ public class TourManagement extends GraphicsWindow{
         });
         this.jPanel.add(this.delete_tour);
 
-        this.reg_button = new JButton("Покинуть");
+        this.reg_button = new JButton("Выйти");
         this.reg_button.setBounds(x, y + 5 * height + 30, width, height);
         this.reg_button.setForeground(Color.BLACK);
         this.reg_button.setFont(BigFontCS);
@@ -125,6 +125,5 @@ public class TourManagement extends GraphicsWindow{
             new MainPage();
         });
         this.jPanel.add(this.reg_button);
-//-----------------------------------------------------------------
     }
 }

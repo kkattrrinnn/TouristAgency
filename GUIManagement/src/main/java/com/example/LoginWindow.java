@@ -90,7 +90,6 @@ public class LoginWindow extends GraphicsWindow {
                     this.error_no_password.setBounds(x, y + 4 * height + 100, width, height);
                     this.jPanel.add(this.error_no_password);
                     this.jPanel.repaint();
-
                 }
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
