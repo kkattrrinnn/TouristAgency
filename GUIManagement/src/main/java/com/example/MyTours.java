@@ -27,13 +27,17 @@ public class MyTours extends GraphicsWindow{
 
     void constructor() {
         //-----------------------------------------------------------------
-        this.label_hello_input = new JLabel("Ваши брони сеер " + this.id);
+        try {
+            this.label_hello_input = new JLabel("Ваши брони сеер " + DBProcessor.getUserNameById(this.id));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         this.label_hello_input.setFont(BigFontCS);
         this.label_hello_input.setBounds(x, y, width, height);
         this.jPanel.add(this.label_hello_input);
 //-------------------------------------------------------------------
         try {
-            this.box_tur = new JComboBox(DBProcessor.getTours());
+            this.box_tur = new JComboBox(DBProcessor.getUserTours(this.id));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

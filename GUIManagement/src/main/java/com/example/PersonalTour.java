@@ -78,7 +78,15 @@ public class PersonalTour extends GraphicsWindow{
             this.jPanel.repaint();
             this.jPanel.revalidate();
             delFrame();
-            new MyTours(this.id);   //сделать удаление тура у человека
+            try {
+                int order_id = DBProcessor.getOrderId(this.id, DBProcessor.getTourId(Tur_name));
+                if (order_id != 0) {
+                    DBProcessor.deleteOrder(order_id);          // удаление заказа из БД
+                    new MyTours(this.id);
+                }
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
         });
         this.jPanel.add(this.Tour_design);
     }

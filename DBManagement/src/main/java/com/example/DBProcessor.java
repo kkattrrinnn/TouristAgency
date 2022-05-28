@@ -85,8 +85,19 @@ public class DBProcessor {
         return check;
     }
 
+    public static String getUserNameById(int id) throws SQLException {
+        String query = "select user_name from touristagency.users where user_id = ?";
+        PreparedStatement prepQuery = connection.prepareStatement(query);
+        prepQuery.setInt(1, id);
+        ResultSet resSet = prepQuery.executeQuery();
+        if (resSet.next()) {
+            return resSet.getString("user_name");
+        }
+        return "";
+    }
+
     /* Добавление нового тура в БД */
-    public void addTour(Connection connection, String name, String starting_point, String final_point,
+    public static void addTour(Connection connection, String name, String starting_point, String final_point,
                                String date, int duration, int price) throws SQLException {
         String queryInsert = "insert into touristagency.tours (tour_name, starting_point, final_point, " +
                             "date, duration, price) values (?, ?, ?, ?, ?, ?)";
@@ -98,6 +109,28 @@ public class DBProcessor {
         prepInsert.setInt(5, duration);
         prepInsert.setInt(6, price);
         prepInsert.execute();
+    }
+
+    public static boolean editTour(int tour_id, String field, String new_value) throws SQLException {
+        boolean answer = false;
+        String  query = "update touristagency.tours set ";
+                query += field;
+                query += "=? where tour_id=?";
+        PreparedStatement prepQuery = getConnection().prepareStatement(query);
+        prepQuery.setInt(2, tour_id);
+        if (field.equals("tour_name") || field.equals("starting_point") || field.equals("final_point") || field.equals("date")) {
+            if (!new_value.equals("")) {
+                prepQuery.setString(1, new_value);
+                System.out.println(prepQuery);
+                prepQuery.execute();
+                answer = true;
+            }
+        } else if (field.equals("duration") || field.equals("price")) {
+            prepQuery.setInt(1, Integer.parseInt(new_value));
+            prepQuery.execute();
+            answer = true;
+        }
+        return answer;
     }
 
     public static String[] getTours() throws SQLException {
@@ -113,10 +146,30 @@ public class DBProcessor {
         return a;
     }
 
+    public static String[] getUserTours(int id) throws SQLException {
+        ArrayList<String> answer = new ArrayList<String>();
+        answer.add("Ваши путёвки");
+        String query = "select tour_id from touristagency.orders where user_id = ?";
+        PreparedStatement prepQuery = getConnection().prepareStatement(query);
+        prepQuery.setInt(1, id);
+        ResultSet resSetId = prepQuery.executeQuery();
+        while (resSetId.next()) {
+            query = "select tour_name from touristagency.tours where tour_id = ?";
+            prepQuery = getConnection().prepareStatement(query);
+            prepQuery.setInt(1, resSetId.getInt("tour_id"));
+            ResultSet resSetNames = prepQuery.executeQuery();
+            while (resSetNames.next()) {
+                answer.add(resSetNames.getString("tour_name"));
+            }
+        }
+        String[] a = answer.toArray(new String[0]);
+        return a;
+    }
+
     public static ArrayList<String> getInfoAboutTheTour(String name) throws SQLException {
         ArrayList<String> answer = new ArrayList<String>();
         String query = "select starting_point, final_point, date, duration, price from touristagency.tours where tour_name = ?";
-        PreparedStatement prepQuery = connection.prepareStatement(query);
+        PreparedStatement prepQuery = getConnection().prepareStatement(query);
         prepQuery.setString(1, name);
         ResultSet resSet = prepQuery.executeQuery();
         while (resSet.next()) {
@@ -130,9 +183,9 @@ public class DBProcessor {
     }
 
     /* Удаление тура из БД */
-    public void deleteTour(int tour_id) throws SQLException {
+    public static void deleteTour(int tour_id) throws SQLException {
         String queryDelete = "delete from touristagency.tours where tour_id = ?";
-        PreparedStatement prepDelete = connection.prepareStatement(queryDelete);
+        PreparedStatement prepDelete = getConnection().prepareStatement(queryDelete);
         prepDelete.setInt(1, tour_id);
         prepDelete.execute();
     }
@@ -140,7 +193,7 @@ public class DBProcessor {
     /* Добавление нового заказа в БД */
     public static void addOrder(int user_id, int tour_id) throws SQLException {
         String queryInsert = "insert into touristagency.orders (user_id, tour_id) values (?, ?)";
-        PreparedStatement prepInsert = connection.prepareStatement(queryInsert);
+        PreparedStatement prepInsert = getConnection().prepareStatement(queryInsert);
         prepInsert.setInt(1, user_id);
         prepInsert.setInt(2, tour_id);
         prepInsert.execute();
@@ -148,7 +201,7 @@ public class DBProcessor {
 
     public static int getTourId(String tour_name) throws SQLException {
         String query = "select tour_id from touristagency.tours where tour_name = ?";
-        PreparedStatement prepInsert = connection.prepareStatement(query);
+        PreparedStatement prepInsert = getConnection().prepareStatement(query);
         prepInsert.setString(1, tour_name);
         ResultSet resSet = prepInsert.executeQuery();
         if (resSet.next()) {
@@ -157,10 +210,22 @@ public class DBProcessor {
         return 0;
     }
 
+    public static int getOrderId(int user_id, int tour_id) throws SQLException {
+        String query = "select order_id from touristagency.orders where (user_id = ?) and (tour_id = ?)";
+        PreparedStatement prepQuery = getConnection().prepareStatement(query);
+        prepQuery.setInt(1, user_id);
+        prepQuery.setInt(2, tour_id);
+        ResultSet resSet = prepQuery.executeQuery();
+        if (resSet.next()) {
+            return resSet.getInt("order_id");
+        }
+        return 0;
+    }
+
     /* Удаление заказа из БД */
-    public void deleteOrder(int order_id) throws SQLException {
+    public static void deleteOrder(int order_id) throws SQLException {
         String queryDelete = "delete from touristagency.orders where order_id = ?";
-        PreparedStatement prepDelete = connection.prepareStatement(queryDelete);
+        PreparedStatement prepDelete = getConnection().prepareStatement(queryDelete);
         prepDelete.setInt(1, order_id);
         prepDelete.execute();
     }

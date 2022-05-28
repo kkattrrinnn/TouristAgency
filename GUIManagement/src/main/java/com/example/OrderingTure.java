@@ -89,7 +89,6 @@ public class OrderingTure extends GraphicsWindow{
                 }
                 new MyTours(this.id);
             } else {
-                System.out.println(this.id);
                 System.out.println("Вы не вошли в систему!");
                 new LoginWindow();
             }

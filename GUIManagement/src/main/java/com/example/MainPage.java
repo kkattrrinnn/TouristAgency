@@ -143,10 +143,10 @@ public class MainPage extends GraphicsWindow{
                     }
                     if (this.id ==19){
                         new TourManagement(this.id);
-                    }else new MyTours(this.id);
+                    }else {
+                        new MyTours(this.id);
+                    }
             });
-
         }
-//----------------------------------------------------------------
     }
 }
