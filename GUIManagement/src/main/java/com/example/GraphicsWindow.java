@@ -8,7 +8,9 @@ public class GraphicsWindow{
     public JPanel jPanel;
     public int width = 1100;                        // размеры окна
     public int height = 700;
-
+    public JButton Deant;
+    public JLabel label_hello_input;
+    public JButton Will_come_back_button;
     public int id = 0;
     GraphicsWindow() {
         this.jFrame = new JFrame();
@@ -26,9 +28,24 @@ public class GraphicsWindow{
 
         this.jPanel = new JPanel();      // создание панели
         this.jPanel.setSize(1100, 700);
+        this.jPanel.setBackground(Color.red);
         this.jPanel.setVisible(true);
         this.jPanel.setLayout(null);
         this.jFrame.add(this.jPanel);
+
+
+        this.Deant = new JButton("Выход");
+        this.Deant.setVisible(true);
+        this.Deant.setBounds(950, 10, 100, 30);
+        this.Deant.setForeground(Color.BLACK);
+        this.Deant.addActionListener(e -> {        // обработка нажатия
+            this.jPanel.removeAll();                         // очистка панели
+            this.jPanel.repaint();
+            this.jPanel.revalidate();
+            delFrame();
+            System.exit(0);
+        });
+        this.jPanel.add(this.Deant);
     }
 
     public void delFrame() {

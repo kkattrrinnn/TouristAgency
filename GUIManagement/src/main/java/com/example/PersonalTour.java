@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class PersonalTour extends GraphicsWindow{
-    JButton Will_come_back_button;
     JButton Tour_design;
     Font BigFontCS = new Font("ComicSans", Font.BOLD, 40);
     JLabel label_Tur_name;

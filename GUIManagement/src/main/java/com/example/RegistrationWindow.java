@@ -11,11 +11,9 @@ public class RegistrationWindow extends GraphicsWindow{
     JPasswordField password_Register;
     JTextField Name_Register;
     JButton ent_button_Register;
-    JButton Will_come_back_button;
     JLabel labelLogin_Register;
     JLabel labelName_Register;
     JLabel labelPassword_Register;
-    JLabel label_hello_Register;
 
     int x = 400 , y = 190, width = 400 , height = 60;
 
@@ -29,10 +27,10 @@ public class RegistrationWindow extends GraphicsWindow{
 
     void constructor() {
 //-----------------------------------------------------------------
-        this.label_hello_Register = new JLabel("Регистрация");
-        this.label_hello_Register.setFont(BigFontCS);
-        this.label_hello_Register.setBounds(x,y-100,width = 400 , height = 60);
-        this.jPanel.add(this.label_hello_Register);
+        this.label_hello_input = new JLabel("Регистрация");
+        this.label_hello_input.setFont(BigFontCS);
+        this.label_hello_input.setBounds(x,y-100,width = 400 , height = 60);
+        this.jPanel.add(this.label_hello_input);
 //-----------------------------------------------------------------
         this.labelName_Register = new JLabel("Введите имя");
         this.labelName_Register.setFont(BigFontCS);

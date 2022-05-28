@@ -10,10 +10,9 @@ public class LoginWindow extends GraphicsWindow {
     JTextField login;
     JPasswordField password_input;
     JButton ent_button_input;
-    JButton Will_come_back_button;
     JLabel labelLogin_input;
     JLabel labelPassword_input;
-    JLabel label_hello_input;
+    JButton reg_button;
     JLabel error_no_password;
     int x = 400 , y = 160, width = 400 , height = 80;
     public ArrayList<String> login_data;
@@ -52,6 +51,19 @@ public class LoginWindow extends GraphicsWindow {
         this.password_input.setBounds(x, y + 2 * height, width, height);
         this.password_input.setFont(BigFontCS);
         this.jPanel.add(this.password_input);
+//-----------------------------------------------------------------
+        this.reg_button = new JButton("Регистрация");
+        this.jPanel.add(this.reg_button);
+        this.reg_button.setBounds(x+150, y + 5 * height+30, width, height);
+        this.reg_button.setForeground(Color.BLACK);
+        this.reg_button.setFont(BigFontCS);
+        this.reg_button.addActionListener(e -> {        // обработка нажатия
+            this.jPanel.removeAll();                         // очистка панели
+            this.jPanel.repaint();
+            this.jPanel.revalidate();
+            delFrame();
+            new RegistrationWindow();
+        });
 //-----------------------------------------------------------------
         this.ent_button_input = new JButton("Войти");
         this.ent_button_input.setBounds(x+150, y + 4 * height, width, height);

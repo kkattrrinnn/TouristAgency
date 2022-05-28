@@ -7,11 +7,7 @@ public class InitialWindow extends GraphicsWindow {
 
     Font BigFontCS = new Font("ComicSans", Font.BOLD, 45);
     JButton ent_button;
-    JButton reg_button;
-
-    JLabel label_hello_input;
     public boolean entrance;
-    public boolean registration;
 
     /* Создание окна с двумя кнопками - вход и регистрация */
     InitialWindow() {

@@ -27,6 +27,7 @@ public class EditTour extends GraphicsWindow{
     JButton Will_come_back_button;
     JLabel label_new_value;
     JTextField new_value_input;
+    JLabel error_no_tour;
     String tour_option;
     int x = 400 , y = 60, width = 300 , height = 80;
     Font BigFontCS = new Font("ComicSans", Font.BOLD, 30);
@@ -67,7 +68,7 @@ public class EditTour extends GraphicsWindow{
         this.Book_a_tour.setForeground(Color.BLACK);
         this.Book_a_tour.setFont(BigFontCS);
         this.Book_a_tour.addActionListener(e -> {                   // обработка нажатия
-            if (Tur_name != null){                                  //если тур не был выбран
+            if (tour_option != null){                                  //если тур не был выбран
                 try {
                     DBProcessor.editTour(DBProcessor.getTourId(Tur_name), getEngTourOption(tour_option), String.valueOf(this.new_value_input.getText()));
                     new EditTour(this.id, this.Tur_name);
@@ -78,6 +79,14 @@ public class EditTour extends GraphicsWindow{
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
+            }else{
+                this.error_no_tour = new JLabel("Не выбран тур"); // сообщение об ошибке
+                this.error_no_tour.setVisible(true);
+                this.error_no_tour.setFont(BigFontCS);
+                this.error_no_tour.setForeground(Color.red);
+                this.error_no_tour.setBounds(x, y+6*height, width, height);
+                this.jPanel.add(this.error_no_tour);
+                this.jPanel.repaint();
             }
         });
         this.jPanel.add(this.Book_a_tour);

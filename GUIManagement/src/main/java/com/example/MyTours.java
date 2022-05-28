@@ -12,8 +12,6 @@ public class MyTours extends GraphicsWindow{
     JComboBox box_tur;
     String Tur_name;
     JButton Book_a_tour;
-    JLabel label_hello_input;
-    JButton Will_come_back_button;
     JLabel error_no_tour;
     int x = 400 , y = 60, width = 400 , height = 80;
     Font BigFontCS = new Font("ComicSans", Font.BOLD, 30);

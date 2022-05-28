@@ -7,23 +7,21 @@ import java.sql.SQLException;
 
 public class MainPage extends GraphicsWindow{
     Font BigFontCS = new Font("ComicSans", Font.BOLD, 30);
-    JLabel label_hello_input;
     int x = 400 , y = 60, width = 400 , height = 80;
     String Tur_name;
     JComboBox box_tur;
     JButton Book_a_tour;
     JButton ent_button_MainPage;
     JButton reg_button;
-
     JButton Tour_design;
     JLabel error_no_tour;
 
-    MainPage(int id) {
+    public MainPage(int id) {
         this.id = id;
         constructor();
     }
 
-    MainPage() {
+    public MainPage() {
         constructor();
     }
 

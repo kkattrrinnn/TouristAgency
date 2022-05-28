@@ -11,9 +11,8 @@ public class TourManagement extends GraphicsWindow{
     JComboBox box_tur;
     String Tur_name;
     JButton Book_a_tour;
-    JLabel label_hello_input;
-    JButton Will_come_back_button;
     JButton delete_tour;
+    JLabel error_no_tour;
 
     JButton reg_button;
     int x = 400 , y = 60, width = 300 , height = 80;
@@ -83,24 +82,25 @@ public class TourManagement extends GraphicsWindow{
         this.delete_tour.setForeground(Color.BLACK);;
         this.delete_tour.setFont(BigFontCS);
         this.delete_tour.addActionListener(e -> {        // обработка нажатия
-            this.jPanel.removeAll();                         // очистка панели
-            this.jPanel.repaint();
-            this.jPanel.revalidate();  //сделать удаление
-            delFrame();
             try {
                 if (Tur_name != null) {
                     DBProcessor.deleteTour(DBProcessor.getTourId(Tur_name));
                 } else {
-
+                    this.error_no_tour = new JLabel("Не выбран тур"); // сообщение об ошибке
+                    this.error_no_tour.setVisible(true);
+                    this.error_no_tour.setFont(BigFontCS);
+                    this.error_no_tour.setForeground(Color.red);
+                    this.error_no_tour.setBounds(x, y + 2 * height, width, height);
+                    this.jPanel.add(this.error_no_tour);
                 }
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
-            new TourManagement(this.id);
+            this.jPanel.repaint();
         });
         this.jPanel.add(this.delete_tour);
 //-----------------------------------------------------------------
-        this.delete_tour = new JButton("Добавить новый тур");
+        this.delete_tour = new JButton("Добавить тур");
         this.delete_tour.setBounds(x+350, y+5*height+30, width, height);
         this.delete_tour.setForeground(Color.BLACK);
         this.delete_tour.setFont(BigFontCS);
@@ -109,11 +109,11 @@ public class TourManagement extends GraphicsWindow{
             this.jPanel.repaint();
             this.jPanel.revalidate();  //сделать удаление
             delFrame();
-            new TourManagement(this.id);
+            new AddTour(this.id);
         });
         this.jPanel.add(this.delete_tour);
 
-        this.reg_button = new JButton("Выйти из аккаунта");
+        this.reg_button = new JButton("Покинуть");
         this.reg_button.setBounds(x, y + 5 * height + 30, width, height);
         this.reg_button.setForeground(Color.BLACK);
         this.reg_button.setFont(BigFontCS);
