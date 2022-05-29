@@ -87,7 +87,7 @@ public class LoginWindow extends GraphicsWindow {
                     this.error_no_password.setVisible(true);
                     this.error_no_password.setFont(BigFontCS);
                     this.error_no_password.setForeground(Color.red);
-                    this.error_no_password.setBounds(x, y + 4 * height + 100, width, height);
+                    this.error_no_password.setBounds(x, y + 4 * height + 150, width, height);
                     this.jPanel.add(this.error_no_password);
                     this.jPanel.repaint();
                 }
